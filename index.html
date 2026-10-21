@@ -17,7 +17,7 @@ a.card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;backgroun
 .info{padding:10px 12px 12px}.t{font-weight:700;font-size:16px;line-height:1.4}.x{color:var(--pink);font-size:13px;margin-top:2px}
 .m{color:var(--sub);font-size:12.5px;margin-top:4px}.empty{grid-column:1/-1;text-align:center;color:var(--sub);padding:40px 0}
 </style></head><body>
-<header><h1>雾冬Hanaki 歌切合集</h1><p>切片man · Ro琪希 · 共 <span id="count"></span> 个歌切 · 更新于 2026-10-22 06:56（北京时间）</p></header>
+<header><h1>雾冬Hanaki 歌切合集</h1><p>切片man · Ro琪希 · 共 <span id="count"></span> 个歌切 · 更新于 2026-10-22 06:57（北京时间）</p></header>
 <div class="bar"><input id="q" placeholder="搜歌名或歌手，比如 雨爱、Troye"><select id="sort"><option value="d">最新发布</option><option value="p">播放最多</option><option value="n">按歌名</option></select></div>
 <div class="chips" id="singers"></div><main id="list"></main>
 <script>
@@ -25,8 +25,8 @@ const DATA = [{"n":"唯一","x":"","s":"告五人","d":1792581349,"l":"04:10","p
 const norm = s => String(s).normalize('NFKC').toLowerCase().replace(/[\s\p{P}\p{S}]/gu, '');
 let singer = '';
 const count = {}; DATA.forEach(r => { const k = (r.s || '歌手还没记上').split(' / ')[0]; count[k] = (count[k] || 0) + 1; });
-const top = Object.entries(count).filter(([, n]) => n > 1).sort((a, b) => b[1] - a[1]);
-document.getElementById('singers').innerHTML = '<button class="chip on" data-s="">全部</button>' + top.map(([k, n]) => '<button class="chip" data-s="' + k + '">' + k + ' ' + n + '</button>').join('');
+const singersTop = Object.entries(count).filter(([, n]) => n > 1).sort((a, b) => b[1] - a[1]);
+document.getElementById('singers').innerHTML = '<button class="chip on" data-s="">全部</button>' + singersTop.map(([k, n]) => '<button class="chip" data-s="' + k + '">' + k + ' ' + n + '</button>').join('');
 document.getElementById('singers').onclick = e => { const b = e.target.closest('button'); if (!b) return; singer = b.dataset.s; document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c === b)); draw(); };
 const day = t => new Date(t * 1000).toLocaleDateString('zh-CN', { timeZone: 'Asia/Shanghai' });
 function draw() {
